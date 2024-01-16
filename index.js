@@ -6,7 +6,7 @@ module.exports = function ({
   specs = "./specs",
   projectCode,
   serviceId,
-  helperMethods,
+  module,
 }) {
   return function (App) {
     App.loadService("SystemView", connection)
@@ -17,7 +17,7 @@ module.exports = function ({
           App,
           projectCode,
           serviceId,
-          helperMethods,
+          module,
         })
       )
       .on(

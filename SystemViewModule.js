@@ -6,7 +6,7 @@ const {
   getName,
   getFilesByNamespace,
 } = require("./utils");
-module.exports = ({ App, specs, projectCode, serviceId, helperMethods = {} }) => {
+module.exports = ({ App, specs, projectCode, serviceId, module = {} }) => {
   specs = specs.substr(-1) === "/" ? specs.substr(0, specs.length - 1) : specs;
   const system = {};
   App.on("ready", (_system) => {
@@ -18,7 +18,7 @@ module.exports = ({ App, specs, projectCode, serviceId, helperMethods = {} }) =>
   return function SystemViewPlugin() {
     const { SystemView } = this.useService("SystemView");
 
-    Object.assign(this, helperMethods);
+    Object.assign(this, module);
     this.saveDoc = ({ documentation, namespace }) => {
       const fileName = `${specs}/docs/${getName(namespace)}.md`;
       ensureDir(`${specs}/docs/`);
